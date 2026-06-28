@@ -32,6 +32,15 @@
 #include <optix_device.h>
 #include <vector_types.h>
 
+// Portable bit-cast helpers: uint_as_float and float_as_uint are nvcc device
+// intrinsics not available in NVRTC. Use memcpy-based implementations instead.
+__forceinline__ __device__ float uint_as_float(unsigned int x) {
+    float f; __builtin_memcpy(&f, &x, sizeof(f)); return f;
+}
+__forceinline__ __device__ unsigned int float_as_uint(float f) {
+    unsigned int x; __builtin_memcpy(&x, &f, sizeof(x)); return x;
+}
+
 __forceinline__ __device__ bool operator>(const float3 a, const float3 b)
 {
   return (a.x > b.x && a.y > b.y && a.z > b.z);
