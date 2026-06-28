@@ -5,6 +5,11 @@
 #include <thrust/gather.h>
 #include <thrust/binary_search.h>
 #include <thrust/adjacent_difference.h>
+#include <thrust/count.h>
+#include <thrust/unique.h>
+#include <thrust/scan.h>
+#include <thrust/fill.h>
+#include <thrust/iterator/counting_iterator.h>
 
 // this can't be in the main cpp file since the file containing cuda kernels to
 // be compiled by nvcc needs to have .cu extensions. See here:
